@@ -1,3 +1,6 @@
+const fetch = require('isomorphic-fetch');
+const {createHttpLink} = require('apollo-link-http');
+
 module.exports = {
   siteMetadata: {
     title: `My website`,
@@ -8,6 +11,19 @@ module.exports = {
     'MarkdownRemark.frontmatter.author': `AuthorJson`
   },
   plugins: [
+    {
+      resolve: 'gatsby-source-graphql',
+      options: {
+        typeName: 'hasura',
+        fieldName: 'hasura',
+        createLink: () => {
+          return createHttpLink({
+            uri: 'https://gatsby-apollo-demo.herokuapp.com/v1/graphql',
+            fetch
+          });
+        }
+      }
+    },
     // Expose `/data` to graphQL layer
     {
       resolve: `gatsby-source-filesystem`,
@@ -73,13 +89,13 @@ module.exports = {
         theme_color: `#191919`,
         display: `minimal-ui`
       }
-    },
+    }
     /* eslint-enable camelcase */
 
     // This plugin generates a service worker and AppShell
     // html file so the site works offline and is otherwise
     // resistant to bad networks. Works with almost any
     // site!
-    `gatsby-plugin-offline`
+    // `gatsby-plugin-offline`
   ]
 };
