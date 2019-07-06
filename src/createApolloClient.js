@@ -15,6 +15,8 @@ const getHeaders = async (headers = {}) => {
     ...headers
   };
 
+  _headers['x-hasura-role'] = 'admin';
+
   return _headers;
 };
 

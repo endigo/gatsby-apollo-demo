@@ -1,5 +1,5 @@
-const fetch = require('isomorphic-fetch');
-const {createHttpLink} = require('apollo-link-http');
+const fetch = require("isomorphic-fetch");
+const { createHttpLink } = require("apollo-link-http");
 
 module.exports = {
   siteMetadata: {
@@ -8,17 +8,17 @@ module.exports = {
     disqus: `gatsby-typescript`
   },
   mapping: {
-    'MarkdownRemark.frontmatter.author': `AuthorJson`
+    "MarkdownRemark.frontmatter.author": `AuthorJson`
   },
   plugins: [
     {
-      resolve: 'gatsby-source-graphql',
+      resolve: "gatsby-source-graphql",
       options: {
-        typeName: 'hasura',
-        fieldName: 'hasura',
+        typeName: "hasura",
+        fieldName: "hasura",
         createLink: () => {
           return createHttpLink({
-            uri: 'https://gatsby-apollo-demo.herokuapp.com/v1/graphql',
+            uri: "https://gatsby-apollo-demo.herokuapp.com/v1/graphql",
             fetch
           });
         }
@@ -30,19 +30,6 @@ module.exports = {
       options: {
         name: `data`,
         path: `${__dirname}/data`
-      }
-    },
-
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        trackingId: 'YOUR_GOOGLE_ANALYTICS_TRACKING_ID',
-        // Puts tracking script in the head instead of the body
-        head: false,
-        // Setting this parameter is optional
-        anonymize: true,
-        // Setting this parameter is also optional
-        respectDNT: true
       }
     },
 

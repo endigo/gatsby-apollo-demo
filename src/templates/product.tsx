@@ -1,6 +1,5 @@
 import * as React from "react";
 import gql from "graphql-tag";
-import { Container } from "semantic-ui-react";
 import { useSubscription } from "react-apollo-hooks";
 import { graphql } from "gatsby";
 
@@ -22,9 +21,10 @@ const PRODUCT_QUERY = gql`
       name
       description
       price
-      reivews {
+      reviews {
         id
         comment
+        created_at
       }
     }
   }
@@ -34,12 +34,12 @@ const ProductPage = (props: ProductProps) => {
   const { product } = props.data.hasura;
   const { data } = useSubscription(PRODUCT_QUERY, {
     variables: {
-      id: props.pageContext.id,
-    },
+      id: props.pageContext.id
+    }
   });
 
   return (
-    <Container>
+    <>
       <h2>{product.name}</h2>
       <p>{product.description}</p>
       <h5>{product.price}</h5>
@@ -51,7 +51,7 @@ const ProductPage = (props: ProductProps) => {
           ))}
         </ul>
       )}
-    </Container>
+    </>
   );
 };
 
