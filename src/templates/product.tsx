@@ -1,6 +1,6 @@
 import * as React from "react";
 import gql from "graphql-tag";
-import { useSubscription } from "react-apollo-hooks";
+import { useSubscription as useQuery } from "react-apollo-hooks";
 import { graphql } from "gatsby";
 
 interface ProductProps {
@@ -16,7 +16,7 @@ interface ProductProps {
 
 const ProductPage = (props: ProductProps) => {
   const { product } = props.data.hasura;
-  const { data } = useSubscription(PRODUCT_QUERY, {
+  const { data, loading } = useQuery(PRODUCT_QUERY, {
     variables: {
       id: props.pageContext.id
     }
@@ -27,6 +27,10 @@ const ProductPage = (props: ProductProps) => {
       <h2>{product.name}</h2>
       <p>{product.description}</p>
       <h5>{product.price}</h5>
+
+      {
+        loading && <span>Loading reviews...</span>
+      }
 
       {data && data.product && (
         <ul>
@@ -42,7 +46,7 @@ const ProductPage = (props: ProductProps) => {
 export default ProductPage;
 
 export const PRODUCT_QUERY = gql`
-  subscription ProductSubscription($id: Int!) {
+  query ProductSubscription($id: Int!) {
     product: products_by_pk(id: $id) {
       id
       name
