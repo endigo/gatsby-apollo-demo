@@ -1,0 +1,12 @@
+overwrite: true
+schema: "https://gatsby-apollo-demo.herokuapp.com/v1/graphql"
+documents: "src/**/*.tsx"
+generates:
+  src/generated/graphql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"

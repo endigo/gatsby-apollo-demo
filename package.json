@@ -20,7 +20,8 @@
     "graphql-types": "gql-gen --url http://localhost:8000/___graphql --template typescript --out ./src/graphql-types.d.ts",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "storybook:build": "build-storybook -c .storybook -o public/docs",
-    "codeclimate": "codeclimate-test-reporter < coverage/lcov.info"
+    "codeclimate": "codeclimate-test-reporter < coverage/lcov.info",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "@types/lodash": "^4.14.116",
@@ -57,7 +58,6 @@
     "gatsby-transformer-json": "^2.2.0",
     "gatsby-transformer-remark": "^2.6.0",
     "gatsby-transformer-sharp": "^2.2.1",
-    "graphql-code-generator": "^0.5.2",
     "graphql-tag": "^2.10.1",
     "gray-matter": "^2.1.1",
     "isomorphic-fetch": "^2.2.1",
@@ -77,6 +77,7 @@
     "ws": "^7.0.1"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^1.3.1",
     "@storybook/addon-actions": "^3.2.14",
     "@storybook/addon-knobs": "^3.2.14",
     "@storybook/addon-notes": "^3.2.10",
@@ -117,7 +118,11 @@
     "stylelint-config-standard": "^16.0.0",
     "ts-jest": "19.0.8",
     "ts-lint": "4.5.1",
-    "xo": "^0.18.1"
+    "xo": "^0.18.1",
+    "@graphql-codegen/typescript": "1.3.1",
+    "@graphql-codegen/typescript-operations": "1.3.1",
+    "@graphql-codegen/typescript-react-apollo": "1.3.1",
+    "@graphql-codegen/introspection": "1.3.1"
   },
   "keywords": [
     "gatsby",
